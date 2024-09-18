@@ -11,7 +11,7 @@ public class RandomWord {
         while (!StdIn.isEmpty()) {
             String word = StdIn.readString();
             // Determine if this word should become the champion
-            Boolean rnd = StdRandom.bernoulli(1.0 / i);
+            boolean rnd = StdRandom.bernoulli(1.0 / i);
             if (rnd) {
                 champion = word;
             }
@@ -22,7 +22,5 @@ public class RandomWord {
         if (champion != null) {
             StdOut.println(champion);
         }
-
-        StdOut.println("Finishing");
     }
 }
