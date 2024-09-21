@@ -1,7 +1,10 @@
-public class QuickUnion {
+package main.java;
+
+public class QuickUnion2 implements UnionFind {
+
     private final int[] id;
 
-    public QuickUnion(int N) {
+    public QuickUnion2(int N) {
         id = new int[N];
         for (int i = 0; i < N; i++) {
             id[i] = i;
@@ -16,17 +19,17 @@ public class QuickUnion {
     }
 
     public boolean connected(int p, int q) {
-        return root(p) == root(q);
+        return (root(p) == root(q));
     }
 
     public void union(int p, int q) {
-        int i = root(p);
-        int j = root(q);
-        id[i] = j;
+
+        id[p] = root(q);
     }
 
+
     public static void main(String[] args) {
-        QuickUnion qu = new QuickUnion(10);
+        QuickUnion2 qu = new QuickUnion2(10);
         qu.union(4, 3);
         qu.union(3, 8);
         qu.union(6, 5);
@@ -40,7 +43,3 @@ public class QuickUnion {
         qu.union(7, 3);
     }
 }
-
-
-
-

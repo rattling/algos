@@ -1,15 +1,19 @@
-public class QuickUnion2 {
+package main.java;
+
+public class QuickUnion3 implements UnionFind {
 
     private final int[] id;
+    private final int N;
 
-    public QuickUnion2(int N) {
+    public QuickUnion3(int N) {
+        this.N = N;
         id = new int[N];
         for (int i = 0; i < N; i++) {
             id[i] = i;
         }
     }
 
-    private int root(int i) {
+    public int root(int i) {
         while (i != id[i]) {
             i = id[i];
         }
@@ -23,11 +27,12 @@ public class QuickUnion2 {
     public void union(int p, int q) {
 
         id[p] = root(q);
+
     }
 
 
     public static void main(String[] args) {
-        QuickUnion2 qu = new QuickUnion2(10);
+        QuickUnion3 qu = new QuickUnion3(10);
         qu.union(4, 3);
         qu.union(3, 8);
         qu.union(6, 5);

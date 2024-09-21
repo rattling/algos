@@ -1,10 +1,12 @@
+package main.java;
+
 /******************************************************************************
- *  Compilation:  javac HelloWorld.java
- *  Execution:    java HelloWorld
+ *  Compilation:  javac main.java.HelloWorld.java
+ *  Execution:    java main.java.HelloWorld
  *
  *  Prints "Hello, World". By tradition, this is everyone's first program.
  *
- *  % java HelloWorld
+ *  % java main.java.HelloWorld
  *  Hello, World
  *
  *  These 17 lines of text are comments. They are not part of the program;
