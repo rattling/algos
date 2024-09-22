@@ -1,6 +1,6 @@
 package main.java;
 
-public class QuickFind3 {
+public class QuickFind3 implements UnionFind {
     private final int N;
     private final int[] id;
 

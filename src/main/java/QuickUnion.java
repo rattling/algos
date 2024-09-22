@@ -1,6 +1,6 @@
 package main.java;
 
-public class QuickUnion {
+public class QuickUnion implements UnionFind {
     private final int[] id;
 
     public QuickUnion(int N) {
