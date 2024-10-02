@@ -2,7 +2,9 @@ package analysis.java;
 
 import edu.princeton.cs.algs4.StdRandom;
 
-import javax.swing.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Triples {
     public Triples(int[] input) {
@@ -39,13 +41,18 @@ public class Triples {
         for (int s = 0; s < Trials; s++) {
             System.out.println("N: " + size[s] + " Time: " + timings[s]);
         }
+
+        // Save size and timings to a CSV file
+        try (PrintWriter writer = new PrintWriter(new FileWriter("C:\\Users\\john\\IdeaProjects\\algos\\data\\output\\size_timings.csv"))) {
+            writer.println("Size,Timing"); // CSV header
+            for (int s = 0; s < Trials; s++) {
+                writer.println(size[s] + "," + timings[s]);
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
+
         // Create and display the scatter plot (set true for log scale, false for normal scale)
-        SwingUtilities.invokeLater(() -> {
-            ScatterPlot plot = new ScatterPlot("Size vs Timing", size, timings, true);  // Use true for log-scale
-            plot.pack();
-            plot.setLocationRelativeTo(null);
-            plot.setVisible(true);
-        });
     }
 }
 
