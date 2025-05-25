@@ -6,20 +6,21 @@ stats = {"processed": 0, "impounded": 0, "north": 0, "south": 0}
 stats_lock = asyncio.Lock()
 
 
-async def sort(address):
-    if random.random() < 0.5:
-        await asyncio.sleep(1)  # Simulate delay (coffee break)
-    return "south" if address % 2 == 0 else "north"
-
-
-async def check(letter):
+def check(letter):
     return random.random() < 0.5
 
 
-async def process_letter(letter):
-    if await check(letter):
+async def sort(address, sem):
+    async with sem:
+        if random.random() < 0.5:
+            await asyncio.sleep(1)  # Simulate delay
+        return "south" if address % 2 == 0 else "north"
+
+
+async def process_letter(letter, sem):
+    if check(letter):
         print(f"Processing letter for {letter['name']} at {letter['address']}")
-        direction = await sort(letter["address"])
+        direction = await sort(letter["address"], sem)
         async with stats_lock:
             stats["processed"] += 1
             stats[direction] += 1
@@ -33,15 +34,18 @@ async def process_letter(letter):
 async def main():
     letters = [{"name": f"Person {i}", "address": i} for i in range(1, 101)]
 
-    # Launch all processing tasks concurrently
-    tasks = [process_letter(letter) for letter in letters]
+    # Allow only 10 sorters to work concurrently
+    sorter_limit = asyncio.Semaphore(10)
+
+    # Launch all processing tasks
+    tasks = [process_letter(letter, sorter_limit) for letter in letters]
     await asyncio.gather(*tasks)
 
-    # Show final results
+    # Final report
     print("\n📬 Final Stats:")
     for key, value in stats.items():
         print(f"{key.capitalize()}: {value}")
 
 
-# Run the event loop
+# Start the event loop
 asyncio.run(main())
