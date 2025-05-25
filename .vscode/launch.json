@@ -1,0 +1,47 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run HelloGoodbye",
+            "request": "launch",
+            "mainClass": "HelloGoodbye",
+            "classPaths": [
+                "${workspaceFolder}/java/bin"
+            ],
+            "args": "apple pear",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/java",
+            "preLaunchTask": "build java"
+        },
+        {
+            "type": "java",
+            "name": "Debug Current Java File",
+            "request": "launch",
+            "mainClass": "${fileBasenameNoExtension}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/java"
+        },
+        {
+            "type": "java",
+            "name": "Debug RandomWord with Input File",
+            "request": "launch",
+            "mainClass": "RandomWord",
+            "classPaths": [
+                "${workspaceFolder}/java/bin",
+                "${workspaceFolder}/java/lib/algs4.jar"
+            ],
+            "args": "< ${workspaceFolder}/java/input/input.txt",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/java",
+            "projectName": "java-algos"
+        },
+        {
+            "type": "python",
+            "request": "launch",
+            "name": "Run Python File",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
